@@ -1,9 +1,21 @@
+import React from 'react';
+import { Card, CardMedia, CardContent, Typography } from '@mui/material';
+
 function CharacterCard({ imageUrl, name }) {
   return (
-    <div className="character-card">
-      <img src={imageUrl} alt={`Imagem do personagem ${name}`} width="150" />
-      <h3>{name}</h3>
-    </div>
+    <Card sx={{ maxWidth: 300, m: 2 }}>
+      <CardMedia
+        component="img"
+        height="200"
+        image={imageUrl}
+        alt={`Imagem do personagem ${name}`}
+      />
+      <CardContent>
+        <Typography gutterBottom variant="h5" component="div">
+          {name}
+        </Typography>
+      </CardContent>
+    </Card>
   );
 }
 

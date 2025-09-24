@@ -1,19 +1,29 @@
 import { useState, useEffect } from 'react';
-import CharacterCard from './components/CharacterCard'; //componente de cards
-import SearchBar from './components/SearchBar'; // componente barra de busca
+import { Container, Grid, Typography, Box, CircularProgress, Alert } from '@mui/material';
+import CharacterCard from './components/CharacterCard';
+import SearchBar from './components/SearchBar';
 import './App.css';
 
 function App() {
   const [personagens, setPersonagens] = useState([]);
+  const [carregando, setCarregando] = useState(true);
+  const [erro, setErro] = useState(null);
 
   useEffect(() => {
     const fetchData = async () => {
       try {
+        setCarregando(true);
         const response = await fetch('https://api.disneyapi.dev/character?pageSize=50');
+        if (!response.ok) {
+            throw new Error('Erro na resposta da API');
+        }
         const data = await response.json();
         setPersonagens(data.data);
       } catch (error) {
         console.error("Erro ao buscar dados da API:", error);
+        setErro("Não foi possível carregar os personagens. Tente novamente mais tarde.");
+      } finally {
+        setCarregando(false);
       }
     };
 
@@ -21,20 +31,45 @@ function App() {
   }, []);
 
   return (
-    <div>
-      <h1>Enciclopédia Mágica Disney</h1>
-      <SearchBar /> {}
-      
-      <div className="characters-grid">
-        {personagens.map((personagem) => (
-          <CharacterCard 
-            key={personagem._id} 
-            name={personagem.name} 
-            imageUrl={personagem.imageUrl} 
-          />
-        ))}
-      </div>
-    </div>
+    <Container maxWidth="lg" sx={{ mt: 4 }}>
+      <Box sx={{ my: 4, textAlign: 'center' }}>
+        <Typography variant="h3" component="h1" gutterBottom>
+          Enciclopédia Mágica Disney
+        </Typography>
+        <SearchBar />
+      </Box>
+
+      {carregando && (
+        <Box sx={{ display: 'flex', justifyContent: 'center', mt: 4 }}>
+          <CircularProgress />
+        </Box>
+      )}
+
+      {erro && (
+        <Alert severity="error" sx={{ mt: 4 }}>
+          {erro}
+        </Alert>
+      )}
+
+      {!carregando && !erro && (
+        <Grid container spacing={4} justifyContent="center">
+          {personagens.map((personagem) => (
+            <Grid item xs={12} sm={6} md={4} lg={3} key={personagem._id}>
+              <CharacterCard 
+                name={personagem.name} 
+                imageUrl={personagem.imageUrl} 
+              />
+            </Grid>
+          ))}
+        </Grid>
+      )}
+
+      {!carregando && !erro && personagens.length === 0 && (
+        <Alert severity="info" sx={{ mt: 4 }}>
+            Nenhum personagem encontrado.
+        </Alert>
+      )}
+    </Container>
   );
 }
 

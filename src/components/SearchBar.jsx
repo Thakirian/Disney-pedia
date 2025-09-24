@@ -1,17 +1,24 @@
-import { useState } from 'react';
+import React from 'react';
+import { Box, TextField, Button } from '@mui/material';
+import SearchIcon from '@mui/icons-material/Search';
 
-function SearchBar() {
-  const [termoBusca, setTermoBusca] = useState('');
-
+function SearchBar({ termoBusca, setTermoBusca }) {
   return (
-    <div className="search-container">
-      <input
-        type="text"
-        placeholder="Buscar por personagem..."
+    <Box sx={{ display: 'flex', justifyContent: 'center', p: 2, m: 2 }}>
+      <TextField
+        label="Buscar por personagem..."
+        variant="outlined"
         value={termoBusca}
         onChange={(evento) => setTermoBusca(evento.target.value)}
+        sx={{ width: '50%', mr: 2 }}
       />
-    </div>
+      <Button
+        variant="contained"
+        endIcon={<SearchIcon />}
+      >
+        Buscar
+      </Button>
+    </Box>
   );
 }
 
