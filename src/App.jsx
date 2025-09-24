@@ -1,34 +1,18 @@
-import { useState, useEffect } from 'react';
+import { useContext, useEffect } from 'react';
 import { Container, Grid, Typography, Box, CircularProgress, Alert } from '@mui/material';
 import CharacterCard from './components/CharacterCard';
 import SearchBar from './components/SearchBar';
+import { SearchContext } from './contexts/SearchContext'; //contexto importado
 import './App.css';
 
 function App() {
-  const [personagens, setPersonagens] = useState([]);
-  const [carregando, setCarregando] = useState(true);
-  const [erro, setErro] = useState(null);
+  const { personagens, carregando, erro, buscarPersonagens } = useContext(SearchContext);
 
+  // Usamos o useEffect para fazer a busca inicial QUANDO o app carregar
+  // Ele chama a função do contexto apenas uma vez.
   useEffect(() => {
-    const fetchData = async () => {
-      try {
-        setCarregando(true);
-        const response = await fetch('https://api.disneyapi.dev/character?pageSize=50');
-        if (!response.ok) {
-            throw new Error('Erro na resposta da API');
-        }
-        const data = await response.json();
-        setPersonagens(data.data);
-      } catch (error) {
-        console.error("Erro ao buscar dados da API:", error);
-        setErro("Não foi possível carregar os personagens. Tente novamente mais tarde.");
-      } finally {
-        setCarregando(false);
-      }
-    };
-
-    fetchData();
-  }, []);
+    buscarPersonagens(''); 
+  }, []); 
 
   return (
     <Container maxWidth="lg" sx={{ mt: 4 }}>
@@ -63,12 +47,12 @@ function App() {
           ))}
         </Grid>
       )}
-
+      
       {!carregando && !erro && personagens.length === 0 && (
-        <Alert severity="info" sx={{ mt: 4 }}>
+         <Alert severity="info" sx={{ mt: 4 }}>
             Nenhum personagem encontrado.
-        </Alert>
-      )}
+         </Alert>
+       )}
     </Container>
   );
 }
