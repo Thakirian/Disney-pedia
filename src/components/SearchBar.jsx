@@ -1,11 +1,9 @@
-import React, { useContext, useState } from 'react';
+import React, { useContext } from 'react';
 import { Box, TextField, Button } from '@mui/material';
 import SearchIcon from '@mui/icons-material/Search';
-import { SearchContext } from '../contexts/SearchContext'; //contexto importado
+import { SearchContext } from '../contexts/SearchContext';
 
 function SearchBar() { 
-  
-  //Pegamos tudo que precisamos do contexto
   const { termoBusca, setTermoBusca, buscarPersonagens } = useContext(SearchContext);
 
   const handleSearch = () => {
@@ -22,7 +20,16 @@ function SearchBar() {
     <Box 
       component="form"
       onSubmit={(e) => { e.preventDefault(); handleSearch(); }}
-      sx={{ display: 'flex', justifyContent: 'center', p: 2, m: 2 }}
+      sx={{ 
+        display: 'flex', 
+        flexDirection: { xs: 'column', sm: 'row' },
+        alignItems: 'center', 
+        justifyContent: 'center', 
+        gap: 2,
+        p: 2, 
+        m: 'auto',
+        maxWidth: 600,
+      }}
     >
       <TextField
         label="Buscar por personagem..."
@@ -30,12 +37,13 @@ function SearchBar() {
         value={termoBusca}
         onChange={(evento) => setTermoBusca(evento.target.value)}
         onKeyDown={handleKeyDown} 
-        sx={{ width: '50%', mr: 2 }}
+        sx={{ width: { xs: '100%', sm: '70%' } }}
       />
       <Button
         type="submit" 
         variant="contained"
         endIcon={<SearchIcon />}
+        sx={{ width: { xs: '100%', sm: 'auto' } }}
       >
         Buscar
       </Button>

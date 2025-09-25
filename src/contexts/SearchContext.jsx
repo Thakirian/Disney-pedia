@@ -1,4 +1,4 @@
-import React, { createContext, useState } from 'react';
+import React, { createContext, useState, useCallback } from 'react';
 
 export const SearchContext = createContext();
 
@@ -8,7 +8,7 @@ export function SearchProvider({ children }) {
   const [termoBusca, setTermoBusca] = useState('');
   const [erro, setErro] = useState(null);
 
-  const buscarPersonagens = async (termo) => {
+  const buscarPersonagens = useCallback(async (termo) => {
     setCarregando(true);
     setErro(null); 
     const url = termo 
@@ -29,7 +29,7 @@ export function SearchProvider({ children }) {
     } finally {
       setCarregando(false);
     }
-  };
+  }, []); // O array de dependências vazio garante que a função seja criada apenas uma vez.
 
   const value = {
     personagens,
