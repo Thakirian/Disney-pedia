@@ -15,9 +15,10 @@ function CharacterCard({ imageUrl, name }) {
     >
       <CardMedia
         component="img"
-        height="200"
+        height="200" 
         image={imageUrl}
         alt={`Imagem do personagem ${name}`}
+<<<<<<< Updated upstream
         sx={{ 
           objectFit: 'cover',
           // O background é um fallback caso a imagem falhe
@@ -30,6 +31,15 @@ function CharacterCard({ imageUrl, name }) {
             variant="h6" 
             component="div"
             align="center"
+=======
+        sx={{ objectFit: 'cover' }} 
+      />
+      <CardContent sx={{ flexGrow: 1 }}> 
+        <Typography 
+            gutterBottom 
+            variant="h6" 
+            component="div" 
+>>>>>>> Stashed changes
             sx={{ minHeight: '3rem' }}
         >
           {name}
