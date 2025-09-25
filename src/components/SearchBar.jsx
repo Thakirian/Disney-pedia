@@ -27,8 +27,7 @@ function SearchBar() {
         justifyContent: 'center', 
         gap: 2,
         p: 2, 
-        // Remover m: 'auto'
-        width: '100%', // Força a largura para 100%
+        width: '100%',
         maxWidth: 750, // Mantém a largura máxima
       }}
     >
@@ -44,6 +43,8 @@ function SearchBar() {
         type="submit" 
         variant="contained"
         endIcon={<SearchIcon />}
+        onClick={handleSearch} 
+        disabled={termoBusca.trim() === ''} 
         sx={{ 
           backgroundColor: '#1976D2' 
         }}
