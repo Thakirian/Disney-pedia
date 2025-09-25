@@ -13,24 +13,8 @@ function App() {
   }, [buscarPersonagens]); // Adiciona 'buscarPersonagens' para seguir as regras do React
 
   return (
-<<<<<<< Updated upstream
     <Container maxWidth="lg" sx={{ py: 4 }}>
       <Box sx={{ my: 4, textAlign: 'center' }}>
-=======
-    // Adiciona margem inferior e preenchimento vertical para um espaçamento geral
-    <Container maxWidth="lg" sx={{ py: 4 }}>
-      <Box 
-        sx={{ 
-          my: 4, 
-          textAlign: 'center', 
-          p: 2,
-          // Propriedades para garantir a centralização vertical e horizontal
-          display: 'flex', 
-          flexDirection: 'column', 
-          alignItems: 'center' 
-        }}
-      >
->>>>>>> Stashed changes
         <Typography variant="h3" component="h1" gutterBottom>
           Enciclopédia Mágica Disney
         </Typography>
@@ -50,7 +34,6 @@ function App() {
       )}
 
       {!carregando && !erro && (
-<<<<<<< Updated upstream
         <Grid container spacing={4} justifyContent="center">
         {personagens.map((personagem) => (
           <Grid item xs={12} sm={6} md={4} lg={3} key={personagem._id}>
@@ -60,17 +43,6 @@ function App() {
             />
           </Grid>
         ))}
-=======
-        <Grid container spacing={4} justifyContent="center" sx={{ margin: 'auto' }}>
-          {personagens.map((personagem) => (
-            <Grid item xs={12} sm={6} md={4} lg={3} key={personagem._id}>
-              <CharacterCard 
-                name={personagem.name} 
-                imageUrl={personagem.imageUrl} 
-              />
-            </Grid>
-          ))}
->>>>>>> Stashed changes
         </Grid>
       )}
       
