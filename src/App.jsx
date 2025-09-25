@@ -16,54 +16,41 @@ function App() {
   return (
     <Container maxWidth="lg" sx={{ py: 4 }}>
       <Box sx={{ my: 4, textAlign: 'center', display: 'flex', flexDirection: 'column', alignItems: 'center' }}>
-        {/* Contêiner para a logo e o nome do projeto */}
         <Box
           sx={{
             display: 'flex',
             alignItems: 'center',
-            gap: 2, // Espaçamento entre os elementos
-            mb: 2 // Margem inferior
+            gap: 2, 
+            mb: 2 
           }}
         >
-          {/* Logo */}
           <Box 
             component="img"
             sx={{ 
-              height: 100, // Altura ajustada para combinar com o texto
+              height: 100, 
             }}
             alt="Disney Logo"
             src={logo}
           />
-          {/* Nome do projeto */}
-          <Typography variant="h3" component="h1" sx={{ color: '#0041C2' }}>
+          <Typography variant="h3" component="h1" sx={{ color: '#1976D2' }}>
             Enciclopédia Mágica Disney
           </Typography>
         </Box>
         <SearchBar />
       </Box>
 
-      {/* 1. Exibir loading quando estiver carregando */}
       {carregando && (
         <Box sx={{ display: 'flex', justifyContent: 'center', mt: 4 }}>
           <CircularProgress />
         </Box>
       )}
 
-      {/* 2. Exibir erro se houver um */}
-      {!carregando && erro && (
+      {erro && (
         <Alert severity="error" sx={{ mt: 4 }}>
           {erro}
         </Alert>
       )}
 
-      {/* 3. Exibir mensagem de "Nenhum resultado" se a lista estiver vazia */}
-      {!carregando && !erro && personagens.length === 0 && (
-         <Alert severity="info" sx={{ mt: 4 }}>
-            Nenhum personagem encontrado.
-         </Alert>
-       )}
-
-      {/* 4. Renderizar a grade de personagens quando os dados estiverem disponíveis */}
       {!carregando && !erro && (
         <Grid container spacing={4} justifyContent="center">
           {personagens.map((personagem) => (
@@ -81,6 +68,12 @@ function App() {
           ))}
         </Grid>
       )}
+
+      {!carregando && !erro && personagens.length === 0 && (
+         <Alert severity="info" sx={{ mt: 4 }}>
+            Nenhum personagem encontrado.
+         </Alert>
+       )}
     </Container>
   );
 }

@@ -27,8 +27,9 @@ function SearchBar() {
         justifyContent: 'center', 
         gap: 2,
         p: 2, 
-        m: 'auto',
-        maxWidth: 600,
+        // Remover m: 'auto'
+        width: '100%', // Força a largura para 100%
+        maxWidth: 750, // Mantém a largura máxima
       }}
     >
       <TextField
@@ -37,13 +38,15 @@ function SearchBar() {
         value={termoBusca}
         onChange={(evento) => setTermoBusca(evento.target.value)}
         onKeyDown={handleKeyDown} 
-        sx={{ width: { xs: '100%', sm: '70%' } }}
+        sx={{ width: '100%' }}
       />
       <Button
         type="submit" 
         variant="contained"
         endIcon={<SearchIcon />}
-        sx={{ width: { xs: '100%', sm: 'auto' } }}
+        sx={{ 
+          backgroundColor: '#1976D2' 
+        }}
       >
         Buscar
       </Button>
