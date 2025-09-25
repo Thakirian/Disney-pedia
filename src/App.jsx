@@ -3,6 +3,7 @@ import { Container, Grid, Typography, Box, CircularProgress, Alert } from '@mui/
 import CharacterCard from './components/CharacterCard';
 import SearchBar from './components/SearchBar';
 import { SearchContext } from './contexts/SearchContext';
+import logo from './image/logo.png';
 import './App.css';
 
 function App() {
@@ -15,9 +16,29 @@ function App() {
   return (
     <Container maxWidth="lg" sx={{ py: 4 }}>
       <Box sx={{ my: 4, textAlign: 'center', display: 'flex', flexDirection: 'column', alignItems: 'center' }}>
-        <Typography variant="h3" component="h1" gutterBottom>
-          Enciclopédia Mágica Disney
-        </Typography>
+        {/* Contêiner para a logo e o nome do projeto */}
+        <Box
+          sx={{
+            display: 'flex',
+            alignItems: 'center',
+            gap: 2, // Espaçamento entre os elementos
+            mb: 2 // Margem inferior
+          }}
+        >
+          {/* Logo */}
+          <Box 
+            component="img"
+            sx={{ 
+              height: 100, // Altura ajustada para combinar com o texto
+            }}
+            alt="Disney Logo"
+            src={logo}
+          />
+          {/* Nome do projeto */}
+          <Typography variant="h3" component="h1" sx={{ color: '#0041C2' }}>
+            Enciclopédia Mágica Disney
+          </Typography>
+        </Box>
         <SearchBar />
       </Box>
 
@@ -50,7 +71,7 @@ function App() {
               item 
               xs={12} sm={6} md={4} lg={3} 
               key={personagem._id}
-              sx={{ display: 'flex', justifyContent: 'center' }} // Centraliza o card dentro do Grid item
+              sx={{ display: 'flex', justifyContent: 'center' }}
             >
               <CharacterCard 
                 name={personagem.name} 
