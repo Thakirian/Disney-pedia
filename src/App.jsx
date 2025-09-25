@@ -43,10 +43,15 @@ function App() {
        )}
 
       {/* 4. Renderizar a grade de personagens quando os dados estiverem disponíveis */}
-      {!carregando && !erro && personagens.length > 0 && (
+      {!carregando && !erro && (
         <Grid container spacing={4} justifyContent="center">
           {personagens.map((personagem) => (
-            <Grid item xs={12} sm={6} md={4} lg={3} key={personagem._id}>
+            <Grid 
+              item 
+              xs={12} sm={6} md={4} lg={3} 
+              key={personagem._id}
+              sx={{ display: 'flex', justifyContent: 'center' }} // Centraliza o card dentro do Grid item
+            >
               <CharacterCard 
                 name={personagem.name} 
                 imageUrl={personagem.imageUrl} 
