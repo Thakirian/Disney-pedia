@@ -6,7 +6,7 @@ const disneyTheme = createTheme({
       main: '#1976D2', 
     },
     secondary: {
-      main: '#FFC107', // Dourado
+      main: '#FFC107',
     },
     background: {
       default: '#FFFFFF',
@@ -31,19 +31,16 @@ const disneyTheme = createTheme({
     },
   },
   components: {
-    // *** IDEIA 2: BRILHO MÁGICO NA BUSCA ***
     MuiOutlinedInput: {
       styleOverrides: {
         root: {
-          // Borda padrão
           '&.Mui-focused .MuiOutlinedInput-notchedOutline': {
-            borderColor: '#FFC107', // Borda dourada
-            boxShadow: '0 0 10px #FFC107', // Efeito de brilho mágico
+            borderColor: '#FFC107',
+            boxShadow: '0 0 10px #FFC107',
           },
         },
       },
     },
-    // Fim da Ideia 2
 
     MuiButton: {
       styleOverrides: {

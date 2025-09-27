@@ -1,27 +1,40 @@
-// src/App.jsx
-
-import { useContext, useEffect } from 'react';
+import React, { useContext, useEffect, useState } from 'react';
 import { Container, Grid, Typography, Box, CircularProgress, Alert } from '@mui/material';
 import CharacterCard from './components/CharacterCard';
 import SearchBar from './components/SearchBar';
+import CharacterDetailsModal from './components/CharacterDetailsModal';
 import { SearchContext } from './contexts/SearchContext';
 import logo from './image/logo.png';
 import './App.css';
 
 function App() {
   const { personagens, carregando, erro, buscarPersonagens } = useContext(SearchContext);
+  
+  const [isModalOpen, setIsModalOpen] = useState(false);
+  const [selectedCharacter, setSelectedCharacter] = useState(null);
 
   useEffect(() => {
-    buscarPersonagens(''); 
-  }, [buscarPersonagens]); 
+    if (personagens.length === 0 && !erro) {
+       buscarPersonagens(''); 
+    }
+  }, [buscarPersonagens, personagens.length, erro]); 
 
-  // PONTO 1: A chave da animação. Usamos o estado de carregamento para garantir que o Grid
-  // seja renderizado após o carregamento (ou alteração de busca), o que dispara a animação.
+  const handleCardClick = (character) => {
+      setSelectedCharacter(character);
+      setIsModalOpen(true);
+  };
+
+  const handleModalClose = () => {
+      setIsModalOpen(false);
+      setSelectedCharacter(null); 
+  };
+  
   const gridKey = carregando ? 'loading' : 'loaded-' + personagens.length; 
 
   return (
     <Container maxWidth="lg" sx={{ py: 4, minHeight: '100vh' }}>
       <Box sx={{ my: 4, textAlign: 'center', display: 'flex', flexDirection: 'column', alignItems: 'center' }}>
+        
         <Box
           sx={{
             display: 'flex',
@@ -41,8 +54,7 @@ function App() {
           <Typography 
             variant="h3" 
             component="h1" 
-            // PONTO 2: Removemos o estilo inline 'color: #FFFFFF'
-            // O título usará agora a cor '#1976D2' definida no theme.js.
+            sx={{ color: '#1976D2' }}
           >
             Enciclopédia Mágica Disney
           </Typography>
@@ -62,8 +74,7 @@ function App() {
         </Alert>
       )}
 
-      {!carregando && !erro && (
-        // Usamos a chave aqui para forçar a re-renderização e a animação
+      {!carregando && !erro && personagens.length > 0 && (
         <Grid container spacing={4} justifyContent="center" key={gridKey}>
           {personagens.map((personagem, index) => (
             <Grid 
@@ -71,13 +82,13 @@ function App() {
               xs={12} sm={6} md={4} lg={3} 
               key={personagem._id}
               sx={{ display: 'flex', justifyContent: 'center' }}
-              // Aplica a classe de animação e o delay cascata
               className="character-entry" 
               style={{ animationDelay: `${index * 0.05}s` }} 
             >
               <CharacterCard 
                 name={personagem.name} 
                 imageUrl={personagem.imageUrl} 
+                onClick={() => handleCardClick(personagem)}
               />
             </Grid>
           ))}
@@ -89,6 +100,12 @@ function App() {
             Nenhum personagem encontrado.
          </Alert>
        )}
+
+      <CharacterDetailsModal 
+          character={selectedCharacter}
+          open={isModalOpen}
+          onClose={handleModalClose}
+      />
     </Container>
   );
 }

@@ -1,5 +1,3 @@
-/* src/index.css */
-
 body {
     margin: 0;
     font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
@@ -8,30 +6,24 @@ body {
     -webkit-font-smoothing: antialiased;
     -moz-osx-smoothing: grayscale;
     
-    /* Gradiente Suave: Topo Claro para Título Azul, desce para Roxo */
     background: linear-gradient(
       180deg, 
-      #F0F8FF 0%,    /* Azul Claríssimo (quase branco) no topo */
-      #D0C0FF 50%,    /* Lilás/Roxo Suave no meio */
-      #1976D2 100%    /* Azul Clássico mais escuro na base */
+      #F0F8FF 0%,
+      #D0C0FF 50%,
+      #1976D2 100%
     );
     background-attachment: fixed;
     min-height: 100vh;
     
-    /* PONTO 3: BRILHOS NA TELA (POEIRA MÁGICA) */
-    /* Usa um pattern de estrelas ou poeira com baixa opacidade */
     background-image: url('https://www.transparenttextures.com/patterns/stardust.png');
-    animation: magic-sparkle 60s linear infinite; /* Animação lenta de movimento */
+    animation: magic-sparkle 60s linear infinite;
   }
   
-  /* Animação para mover o fundo e simular o brilho em movimento */
-  @keyframes magic-sparkle {
+@keyframes magic-sparkle {
     from {
       background-position: 0 0;
     }
     to {
-      background-position: 1000px 1000px; /* Movimento lento e longo */
+      background-position: 1000px 1000px;
     }
-  }
-  
-  /* ... (demais estilos) */
+}
