@@ -3,14 +3,14 @@ import { createTheme } from '@mui/material/styles';
 const disneyTheme = createTheme({
   palette: {
     primary: {
-      main: '#1a50e5', // Um azul vibrante que remete a um céu mágico
+      main: '#1976D2', 
     },
     secondary: {
-      main: '#ffcc00', // Um dourado/amarelo que lembra brilho e magia
+      main: '#FFC107', // Dourado
     },
     background: {
-      default: '#f4f7f9', // Um fundo suave e claro
-      paper: '#ffffff',
+      default: '#FFFFFF',
+      paper: '#FFFFFF', 
     },
   },
   typography: {
@@ -21,21 +21,41 @@ const disneyTheme = createTheme({
       'sans-serif',
     ].join(','),
     h3: {
-      fontWeight: 700,
-      color: '#1a50e5',
-      textShadow: '1px 1px 2px rgba(0,0,0,0.1)', // Efeito de sombra no texto
+      fontWeight: 800,
+      color: '#1976D2',
+      textShadow: '2px 2px 4px rgba(0,0,0,0.4)',
+    },
+    h6: {
+      color: '#1976D2',
+      fontWeight: 600,
     },
   },
   components: {
+    // *** IDEIA 2: BRILHO MÁGICO NA BUSCA ***
+    MuiOutlinedInput: {
+      styleOverrides: {
+        root: {
+          // Borda padrão
+          '&.Mui-focused .MuiOutlinedInput-notchedOutline': {
+            borderColor: '#FFC107', // Borda dourada
+            boxShadow: '0 0 10px #FFC107', // Efeito de brilho mágico
+          },
+        },
+      },
+    },
+    // Fim da Ideia 2
+
     MuiButton: {
       styleOverrides: {
         root: {
-          borderRadius: 20,
-          boxShadow: '0 4px 6px rgba(0,0,0,0.1)', // Sombra no botão
-          transition: 'transform 0.2s',
+          borderRadius: 30,
+          boxShadow: '0 6px 15px rgba(25, 118, 210, 0.4)',
+          transition: 'transform 0.3s, box-shadow 0.3s',
           '&:hover': {
-            transform: 'translateY(-2px)', // Efeito de "levitar"
-            boxShadow: '0 6px 8px rgba(0,0,0,0.15)',
+            transform: 'translateY(-4px)',
+            boxShadow: '0 8px 20px rgba(255, 193, 7, 0.6)',
+            backgroundColor: '#FFC107', 
+            color: '#1976D2',
           },
         },
       },
@@ -43,11 +63,12 @@ const disneyTheme = createTheme({
     MuiCard: {
       styleOverrides: {
         root: {
-          boxShadow: '0 4px 10px rgba(0,0,0,0.1)',
-          transition: 'transform 0.2s',
+          borderRadius: 12,
+          boxShadow: '0 5px 15px rgba(0, 0, 0, 0.1)',
+          transition: 'transform 0.3s, box-shadow 0.3s',
           '&:hover': {
-            transform: 'scale(1.03)',
-            boxShadow: '0 8px 15px rgba(0,0,0,0.15)',
+            transform: 'scale(1.04)',
+            boxShadow: '0 12px 25px rgba(25, 118, 210, 0.25)',
           },
         },
       },
